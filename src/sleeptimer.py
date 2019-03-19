@@ -1,6 +1,7 @@
 #!/usr/bin/env python3
 import subprocess
 import tkinter
+from timer import sec_timer
 
 class Gui:
 
@@ -29,21 +30,21 @@ class Gui:
 		try:
 			timervalue = int(self.inputtext.get('1.0'))
 			shutdown(str(timervalue))
-			start_timer()
+			sec_timer(self.update_label, timervalue)
 		except ValueError:
 			print("not a number")
 			self.inputtext.delete(1.0, tkinter.END)
- 
 
+	def update_label(self, content):
+		print (content)
+		self.timer.config(text=str(content))
+		self.root.update()
 
-	
-def start_timer():
-	pass
 
 def shutdown(timer):
 
 	command = ['shutdown','-h',timer]
-	o = subprocess.check_output(command, shell=True)
+	#o = subprocess.check_output(command, shell=True)
 
 gui = Gui()
 gui.setup_window()
