@@ -1,12 +1,12 @@
 #!/usr/bin/env python3
 import subprocess
 import tkinter
-from timer import sec_timer
+from timer import Clock
+from shutdown import shutdown
 
 class Gui:
 
 	def __init__(self):
-
 		self.root = tkinter.Tk()
 		self.root.geometry("500x300") #You want the size of the app to be 500x500
 		self.root.resizable(0, 0) #Don't allow resizing in the x or y direction
@@ -28,23 +28,20 @@ class Gui:
 
 	def start(self):
 		try:
-			timervalue = int(self.inputtext.get('1.0'))
+			timervalue = int(self.inputtext.get('0.0', tkinter.END))
 			shutdown(str(timervalue))
-			sec_timer(self.update_label, timervalue)
+			clock = Clock(0, timervalue, 0)
+			clock.count_down(self.update_label)
+
 		except ValueError:
 			print("not a number")
 			self.inputtext.delete(1.0, tkinter.END)
 
-	def update_label(self, content):
-		print (content)
-		self.timer.config(text=str(content))
+	def update_label(self, clock):
+		content = '{0}:{1}:{2}'.format(clock.hours, clock.minutes, clock.seconds)
+		self.timer.config(text=content)
 		self.root.update()
 
-
-def shutdown(timer):
-
-	command = ['shutdown','-h',timer]
-	#o = subprocess.check_output(command, shell=True)
 
 gui = Gui()
 gui.setup_window()
