@@ -23,3 +23,16 @@ class Clock:
 						self.seconds = 59
 						self.minutes = 59
 						self.hours -= 1
+
+
+	def format_time(self):
+		hours = str(self.hours)
+		if len(hours) == 1:
+			hours = '0{0}'.format(hours)
+		minutes = str(self.minutes)
+		if len(minutes) == 1:
+			minutes = '0{0}'.format(minutes)
+		seconds = str(self.seconds)
+		if len(seconds) == 1:
+			seconds = '0{0}'.format(seconds)
+		return '{0}:{1}:{2}'.format(hours, minutes, seconds)
