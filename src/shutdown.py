@@ -5,7 +5,7 @@ def shutdown(delay):
 		command = ['shutdown','-s','-t',delay]
 	elif check_platform() == 'Linux':
 		command = ['shutdown','-h',delay]
-	elif check_platform() == 'OSX'
+	elif check_platform() == 'OSX':
 		command = ['']
 		
 	o = subprocess.check_output(command, shell=True)
