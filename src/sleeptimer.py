@@ -38,9 +38,11 @@ class Gui:
 			self.inputtext.delete(1.0, tkinter.END)
 
 	def update_label(self, clock):
-		content = '{0}:{1}:{2}'.format(clock.hours, clock.minutes, clock.seconds)
+		content = clock.format_time()
 		self.timer.config(text=content)
 		self.root.update()
+
+
 
 
 gui = Gui()
